@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+sky_soccer_data/__init__.py
+sky_soccer_data/assets.py
+sky_soccer_data_tests/__init__.py
+sky_soccer_data_tests/test_assets.py
+sports.egg-info/PKG-INFO
+sports.egg-info/SOURCES.txt
+sports.egg-info/dependency_links.txt
+sports.egg-info/requires.txt
+sports.egg-info/top_level.txt

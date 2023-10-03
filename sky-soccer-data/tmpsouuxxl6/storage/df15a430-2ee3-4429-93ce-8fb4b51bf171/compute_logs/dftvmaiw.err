@@ -1,0 +1,7 @@
+[32m2023-10-03 15:27:11 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - df15a430-2ee3-4429-93ce-8fb4b51bf171 - 51183 - LOGS_CAPTURED - Started capturing logs in process (pid: 51183).
+[32m2023-10-03 15:27:11 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - df15a430-2ee3-4429-93ce-8fb4b51bf171 - 51183 - league_standing - STEP_START - Started execution of step "league_standing".
+[32m2023-10-03 15:27:11 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - df15a430-2ee3-4429-93ce-8fb4b51bf171 - 51183 - league_standing - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2023-10-03 15:27:11 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - df15a430-2ee3-4429-93ce-8fb4b51bf171 - league_standing - Writing file at: /Users/kolawole/Documents/PersonalProjects/etl-dagster-duckdb-dbt-dash/sky-soccer-data/tmpsouuxxl6/storage/league_standing using PickledObjectFilesystemIOManager...
+[32m2023-10-03 15:27:11 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - df15a430-2ee3-4429-93ce-8fb4b51bf171 - 51183 - league_standing - ASSET_MATERIALIZATION - Materialized value league_standing.
+[32m2023-10-03 15:27:11 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - df15a430-2ee3-4429-93ce-8fb4b51bf171 - 51183 - league_standing - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2023-10-03 15:27:11 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - df15a430-2ee3-4429-93ce-8fb4b51bf171 - 51183 - league_standing - STEP_SUCCESS - Finished execution of step "league_standing" in 497ms.
