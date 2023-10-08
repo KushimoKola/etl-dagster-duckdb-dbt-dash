@@ -25,32 +25,54 @@ def league_standing():
         url = url_info["url"]
         source = url_info["source"]
 
-    # Send HTTP Request and Parse HTML
-    r = requests.get(url)
-    soup = BeautifulSoup(r.text, "lxml")
+        # Send HTTP Request and Parse HTML
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text, "lxml")
 
-    # Find and Extract Table Headers
-    table = soup.find("table", class_="standing-table__table")
-    headers = table.find_all("th")
-    titles = [i.text for i in headers]
+        # Find and Extract Table Headers
+        table = soup.find("table", class_="standing-table__table")
+        headers = table.find_all("th")
+        titles = [i.text for i in headers]
 
-    # Create an Empty DataFrame
-    df = pd.DataFrame(columns=titles)
+        # Create an Empty DataFrame
+        df = pd.DataFrame(columns=titles)
 
-    # Iterate Through Table Rows and Extract Data
-    rows = table.find_all("tr")
-    for i in rows[1:]:
-        data = i.find_all("td")
-        row = [tr.text.strip() for tr in data]  # Apply .strip() to remove \n
-        l = len(df)
-        df.loc[l] = row
+        # Iterate Through Table Rows and Extract Data
+        rows = table.find_all("tr")
+        for i in rows[1:]:
+            data = i.find_all("td")
+            row = [tr.text.strip() for tr in data]  # Apply .strip() to remove \n
+            l = len(df)
+            df.loc[l] = row
 
-    # Add a column for source URL
-    df["Source"] = source
+        # Add a column for source URL
+        df["Source"] = source
 
-    # Append the DataFrame to the list
-    dfs.append(df)
+        # Append the DataFrame to the list
+        dfs.append(df)
 
     # Concatenate all DataFrames into a single DataFrame
     football_standing = pd.concat(dfs, ignore_index=True)
     football_standing.to_csv("footballstanding.csv")
+
+@asset
+def get_scores():
+    url = "https://www.skysports.com/football-results"
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "lxml")
+
+    home_team = soup.find_all("span", class_="matches__item-col matches__participant matches__participant--side1")
+    x = [name.strip() for i in home_team for name in i.stripped_strings]
+
+    scores = soup.find_all("span", class_="matches__teamscores")
+    s = [name.strip().replace('\n\n', '\n') for i in scores for name in i.stripped_strings]
+    appended_scores = [f"{s[i]}\n{s[i+1]}".replace('\n', ' ') for i in range(0, len(s), 2)]
+
+    away_team = soup.find_all("span", class_="matches__item-col matches__participant matches__participant--side2")
+    y = [name.strip() for i in away_team for name in i.stripped_strings]
+
+    # Make sure all arrays have the same length
+    min_length = min(len(x), len(appended_scores), len(y))
+    data = {"Home Team": x[:min_length], "Scores": appended_scores[:min_length], "Away Team": y[:min_length]}
+    footballscores = pd.DataFrame(data)
+    footballscores.to_csv("footscores.csv")
