@@ -1,0 +1,6 @@
+[32m2023-10-09 13:59:03 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 51692398-5792-440b-adb2-0d3acbdedfbb - 74657 - LOGS_CAPTURED - Started capturing logs in process (pid: 74657).
+[32m2023-10-09 13:59:03 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 51692398-5792-440b-adb2-0d3acbdedfbb - 74657 - create_scores_table - STEP_START - Started execution of step "create_scores_table".
+[32m2023-10-09 13:59:03 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 51692398-5792-440b-adb2-0d3acbdedfbb - 74657 - create_scores_table - STEP_OUTPUT - Yielded output "result" of type "Nothing". (Type check passed).
+[32m2023-10-09 13:59:03 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 51692398-5792-440b-adb2-0d3acbdedfbb - 74657 - create_scores_table - ASSET_MATERIALIZATION - Materialized value create_scores_table.
+[32m2023-10-09 13:59:03 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 51692398-5792-440b-adb2-0d3acbdedfbb - 74657 - create_scores_table - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2023-10-09 13:59:03 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 51692398-5792-440b-adb2-0d3acbdedfbb - 74657 - create_scores_table - STEP_SUCCESS - Finished execution of step "create_scores_table" in 109ms.

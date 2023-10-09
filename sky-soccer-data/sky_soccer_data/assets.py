@@ -8,6 +8,9 @@ from dagster_duckdb import DuckDBResource
 from dagster import Definitions
 import os
 
+current_directory = os.getcwd()
+database_file = os.path.join(current_directory, "my_duckdb_database.duckdb")
+
 @asset
 def league_standing():
     urls = [
@@ -76,3 +79,49 @@ def get_scores():
     data = {"Home Team": x[:min_length], "Scores": appended_scores[:min_length], "Away Team": y[:min_length]}
     footballscores = pd.DataFrame(data)
     footballscores.to_csv("footscores.csv")
+
+
+# Create a duckdb database and and the first table
+@asset
+def create_scores_table(duckdb: DuckDBResource) -> None:
+    scores_df = pd.read_csv(
+        "footscores.csv",
+        names=['Unnamed: 0', 
+               'Home Team', 
+               'Scores', 
+               'Away Team'],
+            
+    )
+
+    with duckdb.get_connection() as conn:
+        conn.execute("CREATE TABLE IF NOT EXISTS scores AS SELECT * FROM scores_df")
+
+# Second table   
+@asset
+def create_standings_table(duckdb: DuckDBResource) -> None:
+    standings_df = pd.read_csv("footballstanding.csv",
+                               names=['Unnamed: 0',
+                                        'Team',
+                                        'Pl',
+                                        'W',
+                                        'D',
+                                        'L',
+                                        'F',
+                                        'A',
+                                        'GD',
+                                        'Pts',
+                                        'Last 6',
+                                        'Source'],
+                                        
+                    )
+
+    with duckdb.get_connection() as conn:
+        conn.execute("CREATE TABLE IF NOT EXISTS standings AS SELECT * FROM standings_df")  
+
+# Create a Dagster definition
+defs = Definitions(
+    assets=[league_standing, get_scores, create_scores_table],
+    resources={
+        "duckdb": DuckDBResource(
+            database=database_file)}
+)
